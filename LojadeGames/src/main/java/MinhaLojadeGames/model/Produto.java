@@ -14,26 +14,29 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity // CRIAR TABELA
 @Table(name = "tb_produtos") // NOME DA TABELA
 public class Produto {
-	
-	@Id 
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotNull(message = "O nome do produto é obrigatório!")
 	@Size(min = 3, max = 30, message = "O atributo nome do produto deve ter no mínimo 03 e no máximo 30 caracteres")
 	private String nomeProduto;
-	
+
 	@NotNull
 	private BigDecimal preco;
-	
+
 	@NotNull(message = "A quantidade em estoque é obrigatório!")
 	private int qtdEstoque;
-	
-	
+
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Categoria categoria;
 
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Usuario usuario;
+	
 	public Categoria getCategoria() {
 		return categoria;
 	}
@@ -73,10 +76,13 @@ public class Produto {
 	public void setQtdEstoque(int qtdEstoque) {
 		this.qtdEstoque = qtdEstoque;
 	}
-	
-	
-	
-	
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 }

@@ -1,4 +1,4 @@
-package myblog.blogpessoal.model;
+package MinhaLojadeGames.model;
 
 import java.util.List;
 
@@ -18,19 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "tb_usuarios")
 public class Usuario {
-	
-	public Usuario(long id, String nome,String usuario,  String senha){
-		
-		this.id = id;
-		this.nome = nome;
-		this.usuario = usuario;
-		this.senha = senha;
-
-	}
-
-	public Usuario() {
-	
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +26,7 @@ public class Usuario {
 	@NotNull
 	@Size(min = 2, max = 100)
 	private String nome;
-	
+
 	@NotNull
 	@Size(min = 2, max = 100)
 	@Email
@@ -48,10 +35,10 @@ public class Usuario {
 	@NotNull
 	@Size(min = 5)
 	private String senha;
-	
-	@OneToMany (mappedBy = "usuario", cascade = CascadeType.REMOVE) 
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
-	private List <Postagem> postagem;
+	private List<Produto> produto;
 
 	public long getId() {
 		return id;
@@ -85,11 +72,12 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public List<Postagem> getPostagem() {
-		return postagem;
+	public List<Produto> getProduto() {
+		return produto;
 	}
 
-	public void setPostagem(List<Postagem> postagem) {
-		this.postagem = postagem;
+	public void setProduto(List<Produto> produto) {
+		this.produto = produto;
 	}
+
 }

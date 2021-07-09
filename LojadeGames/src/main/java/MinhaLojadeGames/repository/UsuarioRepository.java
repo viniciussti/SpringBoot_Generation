@@ -1,18 +1,13 @@
-package myblog.blogpessoal.repository;
+package MinhaLojadeGames.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import myblog.blogpessoal.model.Usuario;
+import MinhaLojadeGames.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	public Optional<Usuario> findByUsuario(String usuario);
-
-	public List<Usuario> findAllByNomeIgnoreCaseContaining(String nome);
-
-	public Usuario findFirstByNome(String nome);
 
 }
