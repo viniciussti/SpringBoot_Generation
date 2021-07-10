@@ -30,14 +30,14 @@ public class UsuarioControllerTest {
 	private Usuario usuario;
 	private Usuario usuarioupd;
 	
-	
+	@Disabled
 	@BeforeAll
 	public void start() {
-		usuario = new Usuario(0L, "Maria", "maria@gmail.com", "44451198");
-		usuarioupd = new Usuario(0L, "Maria da Silva", "maria2@gmail.com", "995467892");
+		usuario = new Usuario(0, "Vinicius", "viniciussantos@gmail.com", "123456789");
+		usuarioupd = new Usuario(19L, "Vinicius Teixeira", "viniciussantos@gmail.com", "123456789");
 	}
 	
-	
+	@Disabled
 	@Test
 	public void deveRealizarPostUsuarios() {
 
@@ -50,12 +50,15 @@ public class UsuarioControllerTest {
 
 		ResponseEntity<Usuario> resposta = testRestTemplate.exchange("/usuarios/cadastrar", HttpMethod.POST, request,Usuario.class);
 		assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
+		
+		
 	}
 	
+
 	@Disabled
 	@Test
 	public void deveMostrarTodosUsuarios() {
-		ResponseEntity<String> resposta = testRestTemplate.exchange("/usuarios/", HttpMethod.GET, null, String.class);
+		ResponseEntity<String> resposta = testRestTemplate.withBasicAuth("viniciussantos@gmail.com", "123456789").exchange("/usuarios/all", HttpMethod.GET, null, String.class);
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
 	}
 	
@@ -65,8 +68,7 @@ public class UsuarioControllerTest {
 
 		HttpEntity<Usuario> request = new HttpEntity<Usuario>(usuarioupd);
 
-		ResponseEntity<Usuario> resposta = testRestTemplate.exchange("/usuarios/alterar", HttpMethod.PUT, request,
-				Usuario.class);
+		ResponseEntity<Usuario> resposta = testRestTemplate.withBasicAuth("viniciussantos@gmail.com", "123456789").exchange("/usuarios/alterar", HttpMethod.PUT, request,Usuario.class);
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
 
 	}
@@ -77,12 +79,12 @@ public class UsuarioControllerTest {
 	public void deveRealizarDeleteUsuarios() {
 
 		/*
-		 * O Contato com Id 3 será apagado somente ele existir no Banco. Caso contrário,
+		 * O Contato com ID será apagado somente ele existir no Banco. Caso contrário,
 		 * o teste irá falhar!
 		 * 
 		 */
-		ResponseEntity<String> resposta = testRestTemplate.exchange("/usuarios/3", HttpMethod.DELETE, null,
-				String.class);
+		ResponseEntity<Usuario> resposta = testRestTemplate.withBasicAuth("viniciussantos@gmail.com", "123456789").exchange("/usuarios/18", HttpMethod.DELETE, null,
+				Usuario.class);
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
 
 	}

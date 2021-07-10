@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import myblog.blogpessoal.model.Usuario;
 
-@SuppressWarnings("unused")
+
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class UsuarioRepositoryTest {
@@ -61,7 +61,7 @@ public class UsuarioRepositoryTest {
 		assertEquals(3, usuarios.size());
 	}
 	
-	
+	@Disabled
 	@AfterAll
 	public void end() {
 		usuariorepository.deleteAll();
