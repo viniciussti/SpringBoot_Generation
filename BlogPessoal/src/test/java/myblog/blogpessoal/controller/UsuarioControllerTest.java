@@ -34,7 +34,7 @@ public class UsuarioControllerTest {
 	@BeforeAll
 	public void start() {
 		usuario = new Usuario(0, "Vinicius", "viniciussantos@gmail.com", "123456789");
-		usuarioupd = new Usuario(19L, "Vinicius Teixeira", "viniciussantos@gmail.com", "123456789");
+		usuarioupd = new Usuario(0L, "Vinicius Teixeira", "viniciussantos@gmail.com", "123456789"); // PASSA O ID QUE QUER ALTERAR
 	}
 	
 	@Disabled
@@ -58,7 +58,7 @@ public class UsuarioControllerTest {
 	@Disabled
 	@Test
 	public void deveMostrarTodosUsuarios() {
-		ResponseEntity<String> resposta = testRestTemplate.withBasicAuth("viniciussantos@gmail.com", "123456789").exchange("/usuarios/all", HttpMethod.GET, null, String.class);
+		ResponseEntity<String> resposta = testRestTemplate.exchange("/usuarios/all", HttpMethod.GET, null, String.class);
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
 	}
 	
@@ -79,7 +79,7 @@ public class UsuarioControllerTest {
 	public void deveRealizarDeleteUsuarios() {
 
 		/*
-		 * O Contato com ID será apagado somente ele existir no Banco. Caso contrário,
+		 * O usuario com ID será apagado somente ele existir no Banco. Caso contrário,
 		 * o teste irá falhar!
 		 * 
 		 */
